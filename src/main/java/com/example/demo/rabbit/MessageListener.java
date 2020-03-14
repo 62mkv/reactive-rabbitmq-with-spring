@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.scheduler.Schedulers;
 import reactor.rabbitmq.RabbitFlux;
-import reactor.rabbitmq.Receiver;
 import reactor.rabbitmq.ReceiverOptions;
 
 @Component

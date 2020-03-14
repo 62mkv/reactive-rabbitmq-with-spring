@@ -9,13 +9,12 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
-import java.time.temporal.TemporalUnit;
 
 
 @Component
 public class Runner implements CommandLineRunner {
 
+    private static final Logger log = LoggerFactory.getLogger(Runner.class);
     private final Publisher publisher;
     private final MessageListener listener;
 
@@ -24,17 +23,14 @@ public class Runner implements CommandLineRunner {
         this.listener = listener;
     }
 
-    private static final Logger log = LoggerFactory.getLogger(Runner.class);
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         log.info("I am being run");
         publisher.publish("Hello from RabbitMQ");
         log.info("Messages are published");
 
         listener.getReceiver()
-                .doOnNext(delivery -> {
-                    log.info("Message is being received: {}", delivery.getBody());
-                })
+                .doOnNext(delivery -> log.info("Message is being received: {}", delivery.getBody()))
                 .blockLast(Duration.of(10L, ChronoUnit.SECONDS));
     }
 }
