@@ -1,7 +1,7 @@
 package com.example.demo;
 
 import com.example.demo.rabbit.MessageListener;
-import com.example.demo.rabbit.Publisher;
+import com.example.demo.rabbit.MessagePublisher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,10 +15,10 @@ import java.time.temporal.ChronoUnit;
 public class Runner implements CommandLineRunner {
 
     private static final Logger log = LoggerFactory.getLogger(Runner.class);
-    private final Publisher publisher;
+    private final MessagePublisher publisher;
     private final MessageListener listener;
 
-    public Runner(Publisher publisher, MessageListener listener) {
+    public Runner(MessagePublisher publisher, MessageListener listener) {
         this.publisher = publisher;
         this.listener = listener;
     }

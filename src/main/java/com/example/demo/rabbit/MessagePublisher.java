@@ -15,15 +15,15 @@ import reactor.rabbitmq.SenderOptions;
 import static reactor.rabbitmq.ResourcesSpecification.*;
 
 @Component
-public class Publisher {
+public class MessagePublisher {
 
-    private static final Logger log = LoggerFactory.getLogger(Publisher.class);
+    private static final Logger log = LoggerFactory.getLogger(MessagePublisher.class);
 
     private final Sender sender;
     private final String exchangeName;
     private final String routingKey;
 
-    public Publisher(ConnectionFactory factory, HostProperties properties) {
+    public MessagePublisher(ConnectionFactory factory, HostProperties properties) {
         SenderOptions senderOptions = new SenderOptions()
                 .connectionFactory(factory)
 
@@ -51,8 +51,7 @@ public class Publisher {
                         routingKey, ("Message " + i).getBytes()
                 ));
 
-        sender.send(messages)
-                .block();
+        sender.sendWithPublishConfirms(messages)
+                .blockLast();
     }
-
 }

@@ -9,9 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @EnableConfigurationProperties(value = {HostProperties.class})
 public class DemoApplication {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
-		System.exit(0);
 	}
 
 }
